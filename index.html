@@ -63,6 +63,7 @@ h1{pointer-events:none}
 .draw{animation-play-state:paused}body.go .draw{animation-play-state:running}
 #gate{position:fixed;inset:0;z-index:100;display:grid;place-content:center;justify-items:center;gap:1rem;text-align:center;padding:1rem;background:radial-gradient(120% 80% at 50% 0,var(--bg2),var(--bg) 60%);transition:opacity 1s}
 #gate.off{opacity:0;pointer-events:none}
+body:not(.go){overflow:hidden}
 #gate .gt{font:400 clamp(4rem,18vw,6.5rem)/1 "Pinyon Script",cursive;color:var(--rose);text-shadow:0 0 30px rgba(244,169,187,.55)}
 #gate p{margin:0;color:var(--soft);font-style:italic}
 #go{background:transparent;border:1px solid var(--rose);color:var(--rose);border-radius:99px;padding:.7rem 1.8rem;font:inherit;font-size:1.4rem;cursor:pointer;animation:beat 1.8s ease-in-out infinite}
@@ -117,9 +118,11 @@ h1{pointer-events:none}
 <div class="letter" id="letter">
 <b>Minha Maylla,</b>
 <p><strong>Feliz aniversário!</strong> Em 20 de outubro de 2000 o mundo ganhou a pessoa que mais me faz feliz. Que o seu dia seja cheio de amor, de risadas e de tudo o que você merece.</p>
-<p>Às vezes eu penso naquele dia no Banese. Você foi pagar uma conta, coisa que quase nunca fazia, e eu estava indo ao banheiro. Era para outra pessoa te atender, mas o destino mexeu os pauzinhos e fui eu. Um simples boleto me deu o seu nome e a coragem de te procurar.</p>
-<p>Obrigado por ser meu lugar de paz. Eu te escolho hoje, amanhã e em todas as fotos que ainda vamos tirar.</p>
-<p>Eu te amo.</p>
+<p>Mais um ano da sua vida começa hoje, e eu queria te dizer o quanto é bonito ver quem você é. Eu admiro a sua inteligência, o seu jeito animado de levar a vida e a força com que você corre atrás do que quer. Você é uma mulher incrível, e eu tenho muito orgulho de estar ao seu lado.</p>
+<p>Quando olho as nossas fotos, a minha parte favorita é sempre a mesma: o seu sorriso de canto, a sua cabeça encostada em mim, o abraço que faz o mundo ficar em silêncio. Nada precisa ser grande. Com você, até um dia comum vira uma lembrança que eu quero guardar para sempre.</p>
+<p>Mais de cinco anos depois, eu ainda te escolho todos os dias. Obrigado por ser meu lugar de paz, meu riso fácil e a pessoa com quem eu quero dividir tudo o que vier.</p>
+<p>Eu desejo que você tenha saúde, paz e todos os seus sonhos realizados, e que nunca duvide do quanto é amada. Que eu esteja sempre por perto para comemorar cada conquista e para te abraçar nos dias difíceis.</p>
+<p>Eu te amo, Maylla. Feliz aniversário, meu amor.</p>
 <div class="sig">Ricardo</div></div></section>
 <footer></footer>
 </main>
@@ -154,12 +157,13 @@ si.value='2021-05-01';upd();
 const env=document.getElementById('env'),L=document.getElementById('letter');
 env.onclick=()=>{L.classList.toggle('open');env.setAttribute('aria-expanded',L.classList.contains('open'));env.style.display=L.classList.contains('open')?'none':'block'};
 // aniversário
+history.scrollRestoration='manual';scrollTo(0,0);
 const T=new Date(),bday=(T.getMonth()===9&&T.getDate()===20)||location.hash==='#aniversario';
 if(bday){document.body.classList.add('bday');document.getElementById('gp').textContent='hoje o dia é todo seu';document.getElementById('hs').textContent='parabéns pelos seus '+(T.getFullYear()-2000)+' anos, meu amor'}
 function confetti(){for(let i=0;i<90;i++){const c=document.createElement('i');c.className='cf';c.style.left=Math.random()*100+'vw';c.style.background=['#f4a9bb','#ecc787','#fff3ee','#c77dff','#ff7aa2'][i%5];c.style.animationDuration=(3+Math.random()*3)+'s';c.style.animationDelay=(Math.random()*2.5)+'s';c.style.setProperty('--dx',(Math.random()*160-80)+'px');document.body.appendChild(c);setTimeout(()=>c.remove(),9500)}}
 // música + entrada
 const bgm=document.getElementById('bgm'),gate=document.getElementById('gate');bgm.volume=.7;
-function enter(){document.body.classList.add('go');if(bday)confetti();gate.classList.add('off');setTimeout(()=>gate.remove(),1100)}
+function enter(){document.body.classList.add('go');scrollTo(0,0);if(bday)confetti();gate.classList.add('off');setTimeout(()=>gate.remove(),1100)}
 document.getElementById('go').onclick=()=>{bgm.play().catch(()=>{});enter()};
 bgm.play().then(enter).catch(()=>{});
 document.querySelectorAll('.rs').forEach(b=>b.onclick=()=>{b.classList.toggle('flip');b.setAttribute('aria-pressed',b.classList.contains('flip'))});
